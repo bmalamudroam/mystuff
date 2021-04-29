@@ -3,12 +3,13 @@ const model = require('../database/model.js');
 //export function
 module.exports = {
   addTodo: (req, res) => {
-    console.log('something');
-    res.send('whoopty');
+    let { task } = req.body;
+    model.addTodo(task, (err, result) => {
+      res.send(result.rows[0].task);
+    })
   },
 
   getTodos: (req, res) => {
-    console.log('something');
     res.send('whoopty');
   }
 }
