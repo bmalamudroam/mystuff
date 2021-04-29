@@ -10,6 +10,7 @@ app.use(cors());
 
 app.post('/api/todo', controller.addTodo);
 app.get('/api/todos', controller.getTodos);
+app.delete('/api/todo', controller.removeTodo);
 
 app.listen(3000, function() {
   console.log('listening on port 3000!');

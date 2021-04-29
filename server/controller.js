@@ -10,6 +10,15 @@ module.exports = {
   },
 
   getTodos: (req, res) => {
-    res.send('whoopty');
+    model.getTodos((err, result) => {
+      res.send(result.rows);
+    })
+  },
+
+  removeTodo: (req, res) => {
+    let { id } = req.body;
+    model.removeTodo(id, (err, result) => {
+      res.send(result);
+    })
   }
 }
