@@ -1,44 +1,49 @@
 import React from 'react';
 import styled from 'styled-components';
 import Item from './ListItem.jsx';
+import AddTodo from './AddTodo.jsx';
 import axios from 'axios';
 
-const TodoWrapper = styled.div`
+const TodoListWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  width: 30%;
-  height: 70%;
+  width: 30vw;
+  height: 50vw;
   background-color: lightblue;
-  padding: 0 1em;
+  /* padding: 0 1em; */
   border: 2px solid pink;
+  font-family: sans-serif;
+
   margin: auto;
   color: darkblue;
 `;
 
-const Title = styled.h3`
+const Title = styled.div`
+  margin: 1vw;
   border-bottom: 3px dotted darkblue;
-  font-size: 4vh;
-  font-family: sans-serif;
+  font-size: 4vw;
+  /* font-family: sans-serif; */
   text-align: center;
 `;
 
 const List = styled.div`
-  flex-grow: 4;
+  flex-grow: 6;
+  margin: 0 5%;
 `;
 
-class Todo extends React.Component {
+class TodoList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tasks: [],
+      todos: [],
     }
     this.setState = this.setState.bind(this);
   }
   componentDidMount() {
     axios.get('/api/todos')
       .then(({ data }) => {
-        this.setState({ tasks: data }, () => {
+        this.setState({ todos: data }, () => {
         });
       })
       .catch(err => {
@@ -46,22 +51,23 @@ class Todo extends React.Component {
       });
   }
   render() {
-    const { tasks } = this.state;
+    const { todos } = this.state;
     return (
-      <TodoWrapper>
+      <TodoListWrapper>
         <Title>
           Todos
         </Title>
         <List>
           {
-            tasks.map(task => (
-              <Item task={task} />
+            todos.map(todo => (
+              <Item todo={todo} />
             ))
           }
         </List>
-      </TodoWrapper>
+        <AddTodo />
+      </TodoListWrapper>
     )
   }
 }
 
-export default Todo;
+export default TodoList;
