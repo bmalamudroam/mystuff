@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Draggable from 'react-draggable';
 
 const ItemWrapper = styled.div`
   box-sizing: border-box;
@@ -42,23 +43,49 @@ class Item extends React.Component {
     this.state = {
       completed: false,
       task: '',
+      deltaPosition: {
+        x: 0, y: 0
+      }
     }
+    this.setState = this.setState.bind(this);
+    this.handleDrag = this.handleDrag.bind(this);
   }
+
+  handleDrag(e, ui) {
+    // debugger;
+    const { x, y } = this.state.deltaPosition;
+    this.setState({
+      deltaPosition: {
+        x: x + ui.deltaX,
+        y: y + ui.deltaY,
+      }
+    });
+  }
+
   render() {
+    const { deltaPosition } = this.state;
     const { todo } = this.props;
     const { id, task } = todo;
     return (
-      <ItemWrapper key={id}>
-        <TimeStamp>
-          4/4/21
-        </TimeStamp>
-        <Task>
-          {task}
-        </Task>
-        <RemoveTodo>
-          X
-        </RemoveTodo>
-      </ItemWrapper>
+      <Draggable
+        axis="x"
+        defaultPosition={{x: 0, y: 0}}
+        // onStop={this.handleStop}
+        onDrag={this.handleDrag}
+      >
+        <ItemWrapper key={id}>
+          <TimeStamp>
+            {/* 4/4/21 */}
+            <div>x: {deltaPosition.x.toFixed(0)}, y: {deltaPosition.y.toFixed(0)}</div>
+          </TimeStamp>
+          <Task>
+            {task}
+          </Task>
+          <RemoveTodo>
+            X
+          </RemoveTodo>
+        </ItemWrapper>
+      </Draggable>
     )
   }
 }
