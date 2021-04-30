@@ -14,6 +14,7 @@ const ItemWrapper = styled.div`
   font-family: inherit;
   font-size: 1.2vw;
   line-height: 1.5vw;
+  transform: translateX(${({x}) => -x}px);
   /* margin: 0 5%; */
 `;
 
@@ -57,7 +58,24 @@ class Item extends React.Component {
     this.setState({
       deltaPosition: {
         x: x + ui.deltaX,
-        y: y + ui.deltaY,
+        y: 0,
+      }
+    });
+  }
+
+  moveTodo(x) {
+
+  }
+
+  handleStop(e, ui) {
+    const { x, y } = this.state.deltaPosition;
+    if (x > 150) {
+      this.moveTodo
+    }
+    this.setState({
+      deltaPosition: {
+        x: 0,
+        y: 0,
       }
     });
   }
@@ -67,13 +85,13 @@ class Item extends React.Component {
     const { todo } = this.props;
     const { id, task } = todo;
     return (
-      <Draggable
-        axis="x"
-        defaultPosition={{x: 0, y: 0}}
-        // onStop={this.handleStop}
-        onDrag={this.handleDrag}
-      >
-        <ItemWrapper key={id}>
+      // <Draggable
+      //   axis="x"
+      //   defaultPosition={{x: 0, y: 0}}
+      //   // onStop={this.handleStop}
+      //   onDrag={this.handleDrag}
+      // >
+        <ItemWrapper key={id} x={deltaPosition.x} draggable="true">
           <TimeStamp>
             {/* 4/4/21 */}
             <div>x: {deltaPosition.x.toFixed(0)}, y: {deltaPosition.y.toFixed(0)}</div>
@@ -85,7 +103,7 @@ class Item extends React.Component {
             X
           </RemoveTodo>
         </ItemWrapper>
-      </Draggable>
+      // </Draggable>
     )
   }
 }
