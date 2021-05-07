@@ -82,6 +82,12 @@ class DragTest extends React.Component {
     this.setState({dragStart: {x: e.clientX, y: e.clientY}}, () => {
       // debugger;
     });
+    let invisible = <div />;
+    invisible.style.opacity = "0";
+    e.dataTransfer.setDragImage(invisible, 0, 0);
+    setTimeout(() => {
+      e.target.style.visibility = "hidden";
+    }, 0);
   }
 
   handleDragEnd(e) {
@@ -92,6 +98,12 @@ class DragTest extends React.Component {
       x: e.clientX - dragStart.x,
       y: e.clientY - dragStart.y
     };
+    // let invisible = <div />;
+    // invisible.style.opacity = "0";
+    // e.dataTransfer.setDragImage(invisible, 0, 0);
+    setTimeout(() => {
+      e.target.style.visibility = "visible";
+    }, 0);
     this.setState({ positionDelta, currentPosition: {x: currentPosition.x + positionDelta.x, y: currentPosition.y + positionDelta.y} }, () => {
       // debugger;
 
