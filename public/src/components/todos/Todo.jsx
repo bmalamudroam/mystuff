@@ -28,7 +28,11 @@ const Title = styled.div`
 const List = styled.div`
   flex-grow: 6;
   margin: 0 5%;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 class TodoList extends React.Component {
