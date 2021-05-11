@@ -5,8 +5,8 @@ import DragTest from './components/todos/dragTest.jsx';
 const App = () => (
   <div>
     <div>add a bound, allow for resizing, add color fill options, allow for input images</div>
-    {/* <Todo /> */}
-    <DragTest />
+    <Todo />
+    {/* <DragTest /> */}
   </div>
 );
 

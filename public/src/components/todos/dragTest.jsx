@@ -126,6 +126,7 @@ const TestBox = styled.div`
   border: 2px solid purple;
   width: 100px;
   height: 100px;
+  resize: both;
   /* display: ${({dragging}) => (dragging ? "hidden" : "visible")}; */
   transform: translateX(${({ x }) => x}px) translateY(${({ y }) => y}px);
 `;

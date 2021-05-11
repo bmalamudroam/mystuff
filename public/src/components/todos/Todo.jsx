@@ -49,6 +49,25 @@ class TodoList extends React.Component {
         console.log(`Error retrieving todos from server: ${err}`);
       });
   }
+
+  handleAddNew(e) {
+    e.preventDefault();
+    let newTask = e.target.newTask.value;
+    axios.post('/api/todo', { task: newTask })
+      .then(result => {
+        axios.get('/api/todos')
+          .then(({ data }) => {
+            this.setState({ todos: data });
+          })
+          .catch(err => {
+            console.log(`Error retrieving tasks after new addition: ${err}`);
+          });
+      })
+      .catch(err => {
+        console.log('Error posting new task: ', err);
+      });
+  }
+
   render() {
     const { todos } = this.state;
     return (
@@ -63,7 +82,7 @@ class TodoList extends React.Component {
             ))
           }
         </List>
-        <AddTodo />
+        <AddTodo handleAddNew={this.handleAddNew.bind(this)}/>
       </TodoListWrapper>
     )
   }

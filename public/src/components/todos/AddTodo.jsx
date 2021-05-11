@@ -27,9 +27,9 @@ const SubmitTodo = styled.input`
   border-left: 2px solid pink;
 `;
 
-const AddTodo = () => (
-  <AddTodoWrapper>
-    <NewTodoInput type="text" placeholder="New Todo..."/>
+const AddTodo = ({ handleAddNew }) => (
+  <AddTodoWrapper onSubmit={handleAddNew}>
+    <NewTodoInput type="text" name="newTask" placeholder="New Todo..."/>
     <SubmitTodo type="submit" value="Add" />
   </AddTodoWrapper>
 );
