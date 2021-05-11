@@ -16,7 +16,7 @@ module.exports = {
   },
 
   removeTodo: (req, res) => {
-    let { id } = req.body;
+    let { id } = req.params;
     model.removeTodo(id, (err, result) => {
       res.send(result);
     })

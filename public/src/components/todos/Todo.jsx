@@ -50,6 +50,24 @@ class TodoList extends React.Component {
       });
   }
 
+  handleDelete(e) {
+    e.preventDefault();
+    let { id } = e.target;
+    axios.delete(`/api/todo/${id}`)
+      .then(result => {
+        axios.get('/api/todos')
+          .then(({ data }) => {
+            this.setState({ todos: data });
+          })
+          .catch(err => {
+            console.log(`Error retrieving tasks after removing todo: ${err}`);
+          });
+      })
+      .catch(err => {
+        console.log(`Error while deleting todo: ${err}`);
+      });
+  }
+
   handleAddNew(e) {
     e.preventDefault();
     let newTask = e.target.newTask.value;
@@ -78,7 +96,7 @@ class TodoList extends React.Component {
         <List>
           {
             todos.map(todo => (
-              <Item todo={todo} />
+              <Item todo={todo} handleDelete={this.handleDelete.bind(this)}/>
             ))
           }
         </List>

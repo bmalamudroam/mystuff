@@ -82,28 +82,20 @@ class Item extends React.Component {
 
   render() {
     const { deltaPosition } = this.state;
-    const { todo } = this.props;
+    const { todo, handleDelete } = this.props;
     const { id, task } = todo;
     return (
-      // <Draggable
-      //   axis="x"
-      //   defaultPosition={{x: 0, y: 0}}
-      //   // onStop={this.handleStop}
-      //   onDrag={this.handleDrag}
-      // >
         <ItemWrapper key={id} x={deltaPosition.x} draggable="true">
           <TimeStamp>
-            {/* 4/4/21 */}
-            <div>x: {deltaPosition.x.toFixed(0)}, y: {deltaPosition.y.toFixed(0)}</div>
+            4/4/21
           </TimeStamp>
           <Task>
             {task}
           </Task>
-          <RemoveTodo>
+          <RemoveTodo onClick={handleDelete} id={id}>
             X
           </RemoveTodo>
         </ItemWrapper>
-      // </Draggable>
     )
   }
 }
